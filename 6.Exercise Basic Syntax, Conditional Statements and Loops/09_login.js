@@ -1,5 +1,5 @@
 function login(input) {
-    let username = input[0];
+    const username = input[0];
 
     function reverseString(string) {
         let newString = '';
@@ -8,17 +8,16 @@ function login(input) {
         }
         return newString;
     }
-    let password = reverseString(username);
+
+    const password = reverseString(username);
 
     let attempts = 0;
-    let loggedIn = false;
     let i = 1;
     while (i < input.length) {
         let combination = input[i];
         attempts++;
 
         if (combination === password) {
-            loggedIn = true;
             console.log(`User ${username} logged in.`);
             break;
         } else {
