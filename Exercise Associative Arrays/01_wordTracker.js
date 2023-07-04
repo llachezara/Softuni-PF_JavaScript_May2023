@@ -1,37 +1,27 @@
-function demo(data) {
-    let wordsToFind = data.shift().split(' ');
-
-    let counter = 0;
-    let obj = {};
-    let arrayOfOccurences = [];
-
+function demo(input) {
+    let wordsToFind = input.shift().split(' ');
+    let arrayOfWords = input;
+    let words = new Map();
+ 
     for (const word of wordsToFind) {
-        obj[word] = 0;
-
-        for (const wordToCheck of data) {
-            if (word === wordToCheck) {
-                counter++;
-            }
+        words.set(word, 0);
+    }
+ 
+    for (const word of arrayOfWords) {
+        if (words.has(word)) {
+            words.set(word, words.get(word) + 1);
         }
-
-        obj[word] = counter;
-        arrayOfOccurences.push(obj[word]);
-
-        counter = 0;
     }
-
-    arrayOfOccurences = arrayOfOccurences.sort((a, b) => b - a);
-    console.log(arrayOfOccurences);
-    
-    for (const word in obj) {
-       for (const occurrences of arrayOfOccurences) {
-         if (occurrences === obj[word]) {
-            console.log(`${word} - ${obj[word]}`);
-         }
-       }
-    }
-} demo([
+ 
+    let sortedWords = Array.from(words).sort((a,b) => b[1] - a[1]);
+ 
+    sortedWords.forEach(element => 
+          console.log(element.join(` - `))
+    );
+ 
+}
+demo([
     'is the',
     'first', 'sentence', 'Here', 'is',
     'another', 'the', 'And', 'finally', 'the',
-    'the', 'sentence'] )
+    'the', 'sentence'])
